@@ -42,5 +42,5 @@ export const siteConfig: Metadata = {
 } as const;
 
 export const links = {
-  sourceCode: "https://github.com/Aadesh098/EchoSign",
+  sourceCode: "https://github.com/Aadesh098/jasmine",
 } as const;
