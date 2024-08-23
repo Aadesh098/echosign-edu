@@ -12,29 +12,31 @@ const main = async () => {
     console.log("Seeding database");
 
     // Delete all existing data
-    // await Promise.all([
-    //   db.delete(schema.userProgress),
-    //   db.delete(schema.challengeOptions),
-    //   db.delete(schema.challenges),
-    //   db.delete(schema.lessons),
-    //   db.delete(schema.units),
-    //   db.delete(schema.courses),
-    // ]);
+    await Promise.all([
+      db.delete(schema.userProgress),
+      db.delete(schema.challengeOptions),
+      db.delete(schema.challenges),
+      db.delete(schema.lessons),
+      db.delete(schema.units),
+      // db.delete(schema.courses),
+    ]);
 
     // Insert courses
-    
+    // const courses = await db
+    //   .insert(schema.courses)
+    //   .values([{ title: "Reading Comprehension", imageSrc: "/reading_comprehension.svg" }])
+    //   .returning();
 
     // For each course, insert units
-    
+   
       const units = await db
         .insert(schema.units)
         .values([
           {
-            courseId: 10,
-            id:2,
-            title: "Investing Basics",
-            description: "Learn the fundamental concepts of investing and asset management.",
-            order: 2,
+            courseId: 14,
+            title: "Chapter 3: Reading Comprehension",
+            description: "Develop skills to analyze, interpret, and draw conclusions from complex texts.",
+            order: 1,
           },
         ])
         .returning();
@@ -44,199 +46,199 @@ const main = async () => {
         const lessons = await db
           .insert(schema.lessons)
           .values([
-            { unitId: unit.id, title: "Investing Essentials", order: 1, id:3 },
-            { unitId: unit.id, title: "Advanced Investment Strategies", order: 2, id:4 },
+            { unitId: unit.id, title: "Part 1: Critical Reading", order: 1, id: 5 },
+            { unitId: unit.id, title: "Part 2: Inference and Deduction", order: 2, id: 6 },
           ])
           .returning();
 
-        // Challenges and options for "Investing Essentials"
-        const investingEssentialsChallenges = [
-                {
-                  lessonId: 3,
-                  id: 11,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "What is the primary difference between a mutual fund and an exchange-traded fund (ETF)?",
-                  order: 1,
-                },
-                {
-                  lessonId: 3,
-                  id: 12,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "Which investment type is generally considered the safest?",
-                  order: 2,
-                },
-                {
-                  lessonId: 3,
-                  id: 13,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "Which of the following investment strategies involves buying and holding a diversified portfolio for an extended period?",
-                  order: 3,
-                },
-                {
-                  lessonId: 3,
-                  id: 14,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "In the context of stock investments, what does the term 'dividend yield' refer to?",
-                  order: 4,
-                },
-                {
-                  lessonId: 3,
-                  id: 15,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "What is a 'bear market'?",
-                  order: 5,
-                }
-              ];
-
-        const investingEssentialsOptions = [
+        // Challenges and options for "Part 1: Critical Reading"
+        const criticalReadingChallenges = [
           {
-            challengeId: 11,
-            options: [
-              { correct: false, text: "A) Mutual funds trade on an exchange, while ETFs do not." },
-              { correct: true, text: "B) ETFs typically have lower fees compared to mutual funds." },
-              { correct: false, text: "C) Mutual funds can only be bought or sold at the end of the trading day, while ETFs can be traded throughout the day." },
-              { correct: false, text: "D) There is no difference between mutual funds and ETFs." },
-            ],
-          },
-          {
-            challengeId: 12,
-            options: [
-              { correct: false, text: "A) Stocks" },
-              { correct: true, text: "B) Bonds" },
-              { correct: false, text: "C) Real estate" },
-              { correct: false, text: "D) Commodities" },
-            ],
-          },
-          {
-            challengeId: 13,
-            options: [
-              { correct: false, text: "A) Day trading" },
-              { correct: false, text: "B) Swing trading" },
-              { correct: true, text: "C) Buy and hold" },
-              { correct: false, text: "D) Arbitrage" },
-            ],
-          },
-          {
-            challengeId: 14,
-            options: [
-              { correct: true, text: "A) The percentage of a company's profit paid out to shareholders in dividends." },
-              { correct: false, text: "B) The total return on investment including capital gains and dividends." },
-              { correct: false, text: "C) The rate at which a company’s stock price is expected to grow." },
-              { correct: false, text: "D) The amount of dividend paid per share relative to the stock price." },
-            ],
-          },
-          {
-            challengeId: 15,
-            options: [
-              { correct: false, text: "A) A market in which stock prices are rising or expected to rise." },
-              { correct: true, text: "B) A market in which stock prices are falling or expected to fall." },
-              { correct: false, text: "C) A market characterized by high volatility with no clear direction." },
-              { correct: false, text: "D) A market where interest rates are decreasing." },
-            ],
-          },
-        ];
-
-        // Challenges and options for "Advanced Investment Strategies"
-        const advancedInvestmentStrategiesChallenges = [
-          {
-            lessonId: 4,
-            id: 16,
-            type: 'SELECT' as 'SELECT', 
-            question: "Which of the following is NOT a fundamental analysis indicator?",
+            lessonId: 5,
+            id: 21,
+            type: 'SELECT' as 'SELECT',
+            question: "What is the main idea of the passage?",
             order: 1,
           },
           {
-            lessonId: 4,
-            id: 17,
-            type: 'SELECT' as 'SELECT', 
-            question: "What does the term 'asset allocation' refer to in investing?",
+            lessonId: 5,
+            id: 22,
+            type: 'SELECT' as 'SELECT',
+            question: "In the passage, the author suggests that:",
             order: 2,
           },
           {
-            lessonId: 4,
-            id: 18,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is a 'bull market'?",
+            lessonId: 5,
+            id: 23,
+            type: 'SELECT' as 'SELECT',
+            question: "Which of the following best describes the tone of the passage?",
             order: 3,
           },
           {
-            lessonId: 4,
-            id: 19,
-            type: 'SELECT' as 'SELECT', 
-            question: "In terms of risk management, what does the 'efficient frontier' represent?",
+            lessonId: 5,
+            id: 24,
+            type: 'SELECT' as 'SELECT',
+            question: "What is implied by the author in the passage?",
             order: 4,
           },
           {
-            lessonId: 4,
-            id: 20,
-            type: 'SELECT' as 'SELECT', 
-            question: "Which of the following is a key principle of Modern Portfolio Theory (MPT)?",
+            lessonId: 5,
+            id: 25,
+            type: 'SELECT' as 'SELECT',
+            question: "What does the author mean by the phrase 'the last straw'?",
             order: 5,
           }
         ];
 
-        const advancedInvestmentStrategiesOptions = [
+        const criticalReadingOptions = [
           {
-            challengeId: 16,
+            challengeId: 21,
             options: [
-              { correct: false, text: "A) Price-to-earnings (P/E) ratio" },
-              { correct: true, text: "B) Moving average convergence divergence (MACD)" },
-              { correct: false, text: "C) Earnings per share (EPS)" },
-              { correct: false, text: "D) Return on equity (ROE)" },
+              { correct: false, text: "a) To explain a scientific concept" },
+              { correct: false, text: "b) To describe a historical event" },
+              { correct: true, text: "c) To argue a point of view" },
+              { correct: false, text: "d) To entertain with a story" },
             ],
           },
           {
-            challengeId: 17,
+            challengeId: 22,
             options: [
-              { correct: true, text: "A) The distribution of a portfolio’s assets among various asset classes." },
-              { correct: false, text: "B) The process of selecting individual securities for a portfolio." },
-              { correct: false, text: "C) The allocation of assets to different investment funds." },
-              { correct: false, text: "D) The rebalancing of assets in a portfolio to maintain a desired risk level." },
+              { correct: false, text: "a) Technology will always advance." },
+              { correct: false, text: "b) Society is resistant to change." },
+              { correct: false, text: "c) Environmental issues are unimportant." },
+              { correct: true, text: "d) Education is key to success." },
             ],
           },
           {
-            challengeId: 18,
+            challengeId: 23,
             options: [
-              { correct: true, text: "A) A market where there is a prolonged increase in asset prices." },
-              { correct: false, text: "B) A market where asset prices fluctuate rapidly without a clear trend." },
-              { correct: false, text: "C) A market characterized by a significant drop in asset prices." },
-              { correct: false, text: "D) A market with stable asset prices." },
+              { correct: true, text: "a) Optimistic" },
+              { correct: false, text: "b) Pessimistic" },
+              { correct: false, text: "c) Neutral" },
+              { correct: false, text: "d) Sarcastic" },
             ],
           },
           {
-            challengeId: 19,
+            challengeId: 24,
             options: [
-              { correct: true, text: "A) The best possible risk-return combination of asset portfolios." },
-              { correct: false, text: "B) The point at which investment risk is minimized." },
-              { correct: false, text: "C) The historical performance range of an asset." },
-              { correct: false, text: "D) The maximum allowable risk for an investment." },
+              { correct: false, text: "a) The solution is simple." },
+              { correct: true, text: "b) The problem is complex." },
+              { correct: false, text: "c) The situation is hopeless." },
+              { correct: false, text: "d) The outcome is uncertain." },
             ],
           },
           {
-            challengeId: 20,
+            challengeId: 25,
             options: [
-              { correct: false, text: "A) The goal is to maximize returns with no concern for risk." },
-              { correct: true, text: "B) Diversification can help in reducing risk without sacrificing returns." },
-              { correct: false, text: "C) The market is always efficient, so no need for diversification." },
-              { correct: false, text: "D) Risk and return are not related in the investment world." },
+              { correct: true, text: "a) The final problem that makes a situation unbearable" },
+              { correct: false, text: "b) A simple solution to a complex issue" },
+              { correct: false, text: "c) A temporary fix to a permanent problem" },
+              { correct: false, text: "d) The most important element of a situation" },
+            ],
+          }
+        ];
+
+        // Challenges and options for "Part 2: Inference and Deduction"
+        const inferenceAndDeductionChallenges = [
+          {
+            lessonId: 6,
+            id: 26,
+            type: 'SELECT' as 'SELECT',
+            question: "From the passage, it can be inferred that the protagonist is:",
+            order: 1,
+          },
+          {
+            lessonId: 6,
+            id: 27,
+            type: 'SELECT' as 'SELECT',
+            question: "What can be deduced about the author's perspective on the issue discussed?",
+            order: 2,
+          },
+          {
+            lessonId: 6,
+            id: 28,
+            type: 'SELECT' as 'SELECT',
+            question: "Based on the text, which of the following is most likely to happen next?",
+            order: 3,
+          },
+          {
+            lessonId: 6,
+            id: 29,
+            type: 'SELECT' as 'SELECT',
+            question: "What can be inferred about the setting of the passage?",
+            order: 4,
+          },
+          {
+            lessonId: 6,
+            id: 30,
+            type: 'SELECT' as 'SELECT',
+            question: "Which of the following best describes the relationship between the two main characters?",
+            order: 5,
+          }
+        ];
+
+        const inferenceAndDeductionOptions = [
+          {
+            challengeId: 26,
+            options: [
+              { correct: false, text: "a) Confident" },
+              { correct: true, text: "b) Anxious" },
+              { correct: false, text: "c) Angry" },
+              { correct: false, text: "d) Indifferent" },
             ],
           },
+          {
+            challengeId: 27,
+            options: [
+              { correct: false, text: "a) They support the current state." },
+              { correct: true, text: "b) They are critical of the issue." },
+              { correct: false, text: "c) They are indifferent to the issue." },
+              { correct: false, text: "d) They are enthusiastic about the issue." },
+            ],
+          },
+          {
+            challengeId: 28,
+            options: [
+              { correct: false, text: "a) The character will leave the situation." },
+              { correct: false, text: "b) The conflict will be resolved peacefully." },
+              { correct: true, text: "c) The situation will worsen." },
+              { correct: false, text: "d) The story will have a happy ending." },
+            ],
+          },
+          {
+            challengeId: 29,
+            options: [
+              { correct: false, text: "a) It takes place in a rural area." },
+              { correct: false, text: "b) It is set in the future." },
+              { correct: true, text: "c) It occurs in an urban environment." },
+              { correct: false, text: "d) It is based on a historical event." },
+            ],
+          },
+          {
+            challengeId: 30,
+            options: [
+              { correct: false, text: "a) They are allies." },
+              { correct: true, text: "b) They are rivals." },
+              { correct: false, text: "c) They are strangers." },
+              { correct: false, text: "d) They are indifferent to each other." },
+            ],
+          }
         ];
 
         // Insert challenges and options for each lesson
-        for (const challenge of investingEssentialsChallenges) {
+        for (const challenge of criticalReadingChallenges) {
           await db.insert(schema.challenges).values(challenge);
         }
-        for (const optionSet of investingEssentialsOptions) {
+        for (const optionSet of criticalReadingOptions) {
           await db.insert(schema.challengeOptions).values(
             optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
           );
         }
 
-        for (const challenge of advancedInvestmentStrategiesChallenges) {
+        for (const challenge of inferenceAndDeductionChallenges) {
           await db.insert(schema.challenges).values(challenge);
         }
-        for (const optionSet of advancedInvestmentStrategiesOptions) {
+        for (const optionSet of inferenceAndDeductionOptions) {
           await db.insert(schema.challengeOptions).values(
             optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
           );

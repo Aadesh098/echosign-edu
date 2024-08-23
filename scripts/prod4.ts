@@ -21,8 +21,11 @@ const main = async () => {
     //   db.delete(schema.courses),
     // ]);
 
-    // Insert courses
-    
+    // // Insert courses
+    // const courses = await db
+    //   .insert(schema.courses)
+    //   .values([{ title: "Writing and Composition", imageSrc: "/writing_composition.svg" }])
+      // .returning();
 
     // For each course, insert units
     
@@ -30,11 +33,10 @@ const main = async () => {
         .insert(schema.units)
         .values([
           {
-            courseId: 10,
-            id:3,
-            title: "Credit and Debt Management",
-            description: "Learn effective strategies for managing credit and debt.",
-            order: 3,
+            courseId: 14,
+            title: "Chapter 4: Writing and Composition",
+            description: "Improve your writing skills by mastering different types of compositions and structures.",
+            order: 1,
           },
         ])
         .returning();
@@ -44,199 +46,199 @@ const main = async () => {
         const lessons = await db
           .insert(schema.lessons)
           .values([
-            { unitId: unit.id, title: "Understanding Credit Scores", order: 1, id:5 },
-            { unitId: unit.id, title: "Debt Management Strategies", order: 2, id:6 },
+            { unitId: unit.id, title: "Part 1: Essay Writing", order: 1, id: 7 },
+            { unitId: unit.id, title: "Part 2: Sentence Structure and Style", order: 2, id: 8 },
           ])
           .returning();
 
-        // Challenges and options for "Understanding Credit Scores"
-        const understandingCreditScoresChallenges = [
-                {
-                  lessonId: 5,
-                  id: 21,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "Which credit score range is generally considered 'excellent'?",
-                  order: 1,
-                },
-                {
-                  lessonId: 5,
-                  id: 22,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "What is the primary factor affecting your credit score?",
-                  order: 2,
-                },
-                {
-                  lessonId: 5,
-                  id: 23,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "Which of the following is a recommended strategy for managing credit card debt?",
-                  order: 3,
-                },
-                {
-                  lessonId: 5,
-                  id: 24,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "What does the term 'credit utilization ratio' refer to?",
-                  order: 4,
-                },
-                {
-                  lessonId: 5,
-                  id: 25,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "Which type of credit account typically has the highest interest rates?",
-                  order: 5,
-                }
-              ];
-
-        const understandingCreditScoresOptions = [
+        // Challenges and options for "Part 1: Essay Writing"
+        const essayWritingChallenges = [
           {
-            challengeId: 21,
-            options: [
-              { correct: false, text: "A) 300-579" },
-              { correct: false, text: "B) 580-669" },
-              { correct: false, text: "C) 670-739" },
-              { correct: true, text: "D) 740-850" },
-            ],
-          },
-          {
-            challengeId: 22,
-            options: [
-              { correct: false, text: "A) Length of credit history" },
-              { correct: false, text: "B) Type of credit accounts" },
-              { correct: true, text: "C) Payment history" },
-              { correct: false, text: "D) Credit inquiries" },
-            ],
-          },
-          {
-            challengeId: 23,
-            options: [
-              { correct: false, text: "A) Making only the minimum payments each month" },
-              { correct: true, text: "B) Consolidating debt into a lower-interest loan" },
-              { correct: false, text: "C) Using multiple credit cards to maximize rewards" },
-              { correct: false, text: "D) Ignoring the balance to avoid stress" },
-            ],
-          },
-          {
-            challengeId: 24,
-            options: [
-              { correct: true, text: "A) The percentage of available credit being used." },
-              { correct: false, text: "B) The ratio of credit card balances to income." },
-              { correct: false, text: "C) The total number of credit accounts open." },
-              { correct: false, text: "D) The average age of credit accounts." },
-            ],
-          },
-          {
-            challengeId: 25,
-            options: [
-              { correct: false, text: "A) Mortgage" },
-              { correct: false, text: "B) Auto loan" },
-              { correct: false, text: "C) Personal loan" },
-              { correct: true, text: "D) Credit card" },
-            ],
-          },
-        ];
-
-        // Challenges and options for "Debt Management Strategies"
-        const debtManagementStrategiesChallenges = [
-          {
-            lessonId: 6,
-            id: 26,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is 'debt consolidat2ion'?",
+            lessonId: 7,
+            id: 31,
+            type: 'SELECT' as 'SELECT',
+            question: "Which is the best thesis statement for an argumentative essay on climate change?",
             order: 1,
           },
           {
-            lessonId: 6,
-            id: 27,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is the effect of a 'hard inquiry' on your credit score?",
+            lessonId: 7,
+            id: 32,
+            type: 'SELECT' as 'SELECT',
+            question: "What is the purpose of a topic sentence in a paragraph?",
             order: 2,
           },
           {
-            lessonId: 6,
-            id: 28,
-            type: 'SELECT' as 'SELECT', 
-            question: "What does the term 'secured credit card' refer to?",
+            lessonId: 7,
+            id: 33,
+            type: 'SELECT' as 'SELECT',
+            question: "Which of the following best describes a persuasive essay?",
             order: 3,
           },
           {
-            lessonId: 6,
-            id: 29,
-            type: 'SELECT' as 'SELECT', 
-            question: "Which of the following is a good practice to maintain a healthy credit score?",
+            lessonId: 7,
+            id: 34,
+            type: 'SELECT' as 'SELECT',
+            question: "What is the most effective way to conclude an argumentative essay?",
             order: 4,
           },
           {
-            lessonId: 6,
-            id: 30,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is the typical duration of a bankruptcy record on a credit report?",
+            lessonId: 7,
+            id: 35,
+            type: 'SELECT' as 'SELECT',
+            question: "Choose the most coherent sentence order for the following paragraph:",
             order: 5,
           }
         ];
 
-        const debtManagementStrategiesOptions = [
+        const essayWritingOptions = [
           {
-            challengeId: 26,
+            challengeId: 31,
             options: [
-              { correct: true, text: "A) The process of combining multiple debts into a single loan with a lower interest rate." },
-              { correct: false, text: "B) The act of paying off debt using a credit card balance transfer." },
-              { correct: false, text: "C) The strategy of increasing the amount of credit available to improve credit utilization." },
-              { correct: false, text: "D) The creation of a new debt to pay off old debts." },
+              { correct: false, text: "a) Climate change is a serious issue, but it can be solved." },
+              { correct: false, text: "b) The effects of climate change are over-exaggerated." },
+              { correct: true, text: "c) Climate change is real and needs to be addressed immediately." },
+              { correct: false, text: "d) Climate change is a myth and should not concern us." },
             ],
           },
           {
-            challengeId: 27,
+            challengeId: 32,
             options: [
-              { correct: false, text: "A) It has no impact on your credit score." },
-              { correct: true, text: "B) It can temporarily lower your credit score." },
-              { correct: false, text: "C) It improves your credit score." },
-              { correct: false, text: "D) It permanently lowers your credit score." },
+              { correct: true, text: "a) To introduce the main idea of the paragraph" },
+              { correct: false, text: "b) To provide supporting details" },
+              { correct: false, text: "c) To conclude the paragraph" },
+              { correct: false, text: "d) To transition between ideas" },
             ],
           },
           {
-            challengeId: 28,
+            challengeId: 33,
             options: [
-              { correct: true, text: "A) A credit card backed by a security deposit to limit risk." },
-              { correct: false, text: "B) A credit card with a high credit limit and no annual fee." },
-              { correct: false, text: "C) A credit card with additional fraud protection features." },
-              { correct: false, text: "D) A credit card specifically for online purchases." },
+              { correct: false, text: "a) It aims to inform the reader about a topic." },
+              { correct: true, text: "b) It aims to persuade the reader to adopt a certain viewpoint." },
+              { correct: false, text: "c) It tells a story in a creative manner." },
+              { correct: false, text: "d) It explains a process step-by-step." },
             ],
           },
           {
-            challengeId: 29,
+            challengeId: 34,
             options: [
-              { correct: false, text: "A) Frequently closing old credit accounts." },
-              { correct: false, text: "B) Missing payments to reduce outstanding balances." },
-              { correct: true, text: "C) Keeping credit card balances low relative to credit limits." },
-              { correct: false, text: "D) Using only one credit card for all purchases." },
+              { correct: true, text: "a) Restate your thesis and summarize your main points." },
+              { correct: false, text: "b) Introduce new arguments to strengthen your position." },
+              { correct: false, text: "c) Apologize for any potential disagreements." },
+              { correct: false, text: "d) End with an unrelated quote to leave a lasting impression." },
             ],
           },
           {
-            challengeId: 30,
+            challengeId: 35,
             options: [
-              { correct: false, text: "A) 3 years" },
-              { correct: false, text: "B) 5 years" },
-              { correct: false, text: "C) 7 years" },
-              { correct: true, text: "D) 10 years" },
+              { correct: false, text: "a) ii, iv, i, iii" },
+              { correct: false, text: "b) ii, i, iv, iii" },
+              { correct: false, text: "c) i, ii, iii, iv" },
+              { correct: true, text: "d) iv, ii, iii, i" },
+            ],
+          }
+        ];
+
+        // Challenges and options for "Part 2: Sentence Structure and Style"
+        const sentenceStructureChallenges = [
+          {
+            lessonId: 8,
+            id: 36,
+            type: 'SELECT' as 'SELECT',
+            question: "Which of the following sentences is the most concise and clear?",
+            order: 1,
+          },
+          {
+            lessonId: 8,
+            id: 37,
+            type: 'SELECT' as 'SELECT',
+            question: "Which sentence best maintains a formal tone?",
+            order: 2,
+          },
+          {
+            lessonId: 8,
+            id: 38,
+            type: 'SELECT' as 'SELECT',
+            question: "Identify the sentence that avoids redundancy:",
+            order: 3,
+          },
+          {
+            lessonId: 8,
+            id: 39,
+            type: 'SELECT' as 'SELECT',
+            question: "Choose the most parallel sentence structure:",
+            order: 4,
+          },
+          {
+            lessonId: 8,
+            id: 40,
+            type: 'SELECT' as 'SELECT',
+            question: "Which sentence uses the correct word order?",
+            order: 5,
+          }
+        ];
+
+        const sentenceStructureOptions = [
+          {
+            challengeId: 36,
+            options: [
+              { correct: false, text: "a) Due to the fact that he was late, he missed the meeting." },
+              { correct: true, text: "b) Because he was late, he missed the meeting." },
+              { correct: false, text: "c) On account of his tardiness, he missed the meeting." },
+              { correct: false, text: "d) As a result of being late, he missed the meeting." },
             ],
           },
+          {
+            challengeId: 37,
+            options: [
+              { correct: false, text: "a) You can’t just skip the meeting without telling anyone." },
+              { correct: false, text: "b) It’s cool if you want to reschedule the meeting." },
+              { correct: true, text: "c) You are advised to inform the team if you are unable to attend the meeting." },
+              { correct: false, text: "d) No worries if you miss the meeting; just let us know." },
+            ],
+          },
+          {
+            challengeId: 38,
+            options: [
+              { correct: false, text: "a) The committee will meet at 10 AM in the morning." },
+              { correct: false, text: "b) The committee will meet at 10 AM in the morning hours." },
+              { correct: true, text: "c) The committee will meet at 10 AM." },
+              { correct: false, text: "d) The committee will meet at 10 AM in the morning time." },
+            ],
+          },
+          {
+            challengeId: 39,
+            options: [
+              { correct: false, text: "a) She enjoys reading, jogging, and to swim." },
+              { correct: true, text: "b) She enjoys reading, jogging, and swimming." },
+              { correct: false, text: "c) She enjoys reading, jogging, and to swimming." },
+              { correct: false, text: "d) She enjoys reading, to jog, and swimming." },
+            ],
+          },
+          {
+            challengeId: 40,
+            options: [
+              { correct: false, text: "a) The cat, who is usually very quiet, is outside barking loudly." },
+              { correct: true, text: "b) The cat, who is usually very quiet, is barking loudly outside." },
+              { correct: false, text: "c) The cat, who is barking loudly, is usually very quiet outside." },
+              { correct: false, text: "d) The cat, who is outside barking loudly, is usually very quiet." },
+            ],
+          }
         ];
 
         // Insert challenges and options for each lesson
-        for (const challenge of understandingCreditScoresChallenges) {
+        for (const challenge of essayWritingChallenges) {
           await db.insert(schema.challenges).values(challenge);
         }
-        for (const optionSet of understandingCreditScoresOptions) {
+        for (const optionSet of essayWritingOptions) {
           await db.insert(schema.challengeOptions).values(
             optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
           );
         }
 
-        for (const challenge of debtManagementStrategiesChallenges) {
+        for (const challenge of sentenceStructureChallenges) {
           await db.insert(schema.challenges).values(challenge);
         }
-        for (const optionSet of debtManagementStrategiesOptions) {
+        for (const optionSet of sentenceStructureOptions) {
           await db.insert(schema.challengeOptions).values(
             optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
           );

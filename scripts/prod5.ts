@@ -21,8 +21,11 @@ const main = async () => {
     //   db.delete(schema.courses),
     // ]);
 
-    // Insert courses
-    
+    // // Insert courses
+    // const courses = await db
+    //   .insert(schema.courses)
+    //   .values([{ title: "Listening and Speaking Skills", imageSrc: "/listening_speaking.svg" }])
+      // .returning();
 
     // For each course, insert units
     
@@ -30,11 +33,10 @@ const main = async () => {
         .insert(schema.units)
         .values([
           {
-            courseId: 10,
-            id:4,
-            title: "Taxation",
-            description: "Understand various aspects of taxation and its implications.",
-            order: 4,
+            courseId: 14,
+            title: "Chapter 5: Listening and Speaking Skills",
+            description: "Enhance your ability to comprehend spoken English and express your thoughts clearly.",
+            order: 1,
           },
         ])
         .returning();
@@ -44,207 +46,209 @@ const main = async () => {
         const lessons = await db
           .insert(schema.lessons)
           .values([
-            { unitId: unit.id, title: "Understanding Taxation Basics", order: 1, id:7 },
-            { unitId: unit.id, title: "Tax Strategies and Benefits", order: 2, id:8 },
+            { unitId: unit.id, title: "Part 1: Listening Comprehension", order: 1, id: 9 },
+            { unitId: unit.id, title: "Part 2: Speaking Practice", order: 2, id: 10 },
           ])
           .returning();
 
-        // Challenges and options for "Understanding Taxation Basics"
-        const understandingTaxationBasicsChallenges = [
-                {
-                  lessonId: 7,
-                  id: 31,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "Which of the following is a type of tax-deferred investment account?",
-                  order: 1,
-                },
-                {
-                  lessonId: 7,
-                  id: 32,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "What is 'capital gains tax'?",
-                  order: 2,
-                },
-                {
-                  lessonId: 7,
-                  id: 33,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "What is the difference between a tax deduction and a tax credit?",
-                  order: 3,
-                },
-                {
-                  lessonId: 7,
-                  id: 34,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "How does earned income differ from investment income in terms of taxation?",
-                  order: 4,
-                },
-                {
-                  lessonId: 7,
-                  id: 35,
-                  type: 'SELECT' as 'SELECT', 
-                  question: "Which of the following is true about Roth IRAs?",
-                  order: 5,
-                }
-              ];
-
-        const understandingTaxationBasicsOptions = [
+        // Challenges and options for "Part 1: Listening Comprehension"
+        const listeningChallenges = [
           {
-            challengeId: 31,
-            options: [
-              { correct: true, text: "A) Traditional IRA" },
-              { correct: false, text: "B) Roth IRA" },
-              { correct: false, text: "C) Health Savings Account (HSA)" },
-              { correct: false, text: "D) 529 Plan" },
-            ],
-          },
-          {
-            challengeId: 32,
-            options: [
-              { correct: true, text: "A) The tax on the value of income earned through investments." },
-              { correct: false, text: "B) The tax on interest income earned from savings accounts." },
-              { correct: false, text: "C) The tax on rental income from real estate." },
-              { correct: false, text: "D) The tax on wages earned from employment." },
-            ],
-          },
-          {
-            challengeId: 33,
-            options: [
-              { correct: true, text: "A) A tax deduction reduces taxable income, while a tax credit directly reduces the amount of tax owed." },
-              { correct: false, text: "B) A tax deduction directly reduces the amount of tax owed, while a tax credit reduces taxable income." },
-              { correct: false, text: "C) A tax credit is a percentage of the amount spent, while a tax deduction is a fixed amount." },
-              { correct: false, text: "D) A tax credit is only available for specific types of income, while a tax deduction is not." },
-            ],
-          },
-          {
-            challengeId: 34,
-            options: [
-              { correct: true, text: "A) Earned income is subject to payroll taxes and income taxes, whereas investment income might only be subject to capital gains tax." },
-              { correct: false, text: "B) Earned income is taxed at a lower rate than investment income." },
-              { correct: false, text: "C) Investment income is subject to payroll taxes, while earned income is subject to income taxes." },
-              { correct: false, text: "D) There is no difference in how earned and investment income are taxed." },
-            ],
-          },
-          {
-            challengeId: 35,
-            options: [
-              { correct: false, text: "A) Contributions to a Roth IRA are tax-deductible, but withdrawals are taxed." },
-              { correct: true, text: "B) Contributions are made with after-tax dollars, and withdrawals are tax-free after age 59½." },
-              { correct: false, text: "C) Both contributions and withdrawals are tax-free." },
-              { correct: false, text: "D) Roth IRAs are only available to high-income earners." },
-            ],
-          },
-        ];
-
-        // Challenges and options for "Tax Strategies and Benefits"
-        const taxStrategiesAndBenefitsChallenges = [
-          {
-            lessonId: 8,
-            id: 36,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is a tax credit?",
+            lessonId: 9,
+            id: 41,
+            type: 'SELECT' as 'SELECT',
+            question: "What is the main point of the speaker’s message?",
             order: 1,
           },
           {
-            lessonId: 8,
-            id: 37,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is the standard deduction?",
+            lessonId: 9,
+            id: 42,
+            type: 'SELECT' as 'SELECT',
+            question: "What can be inferred about the speaker’s attitude?",
             order: 2,
           },
           {
-            lessonId: 8,
-            id: 38,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is the primary difference between taxable and non-taxable income?",
+            lessonId: 9,
+            id: 43,
+            type: 'SELECT' as 'SELECT',
+            question: "What does the speaker imply by saying 'It’s not rocket science'?",
             order: 3,
           },
           {
-            lessonId: 8,
-            id: 39,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is the alternative minimum tax (AMT)?",
+            lessonId: 9,
+            id: 44,
+            type: 'SELECT' as 'SELECT',
+            question: "Which of the following best describes the speaker’s tone?",
             order: 4,
           },
           {
-            lessonId: 8,
-            id: 40,
-            type: 'SELECT' as 'SELECT', 
-            question: "What is 'tax loss harvesting'?",
+            lessonId: 9,
+            id: 45,
+            type: 'SELECT' as 'SELECT',
+            question: "How does the speaker suggest handling the situation?",
             order: 5,
           }
         ];
 
-        const taxStrategiesAndBenefitsOptions = [
+        const listeningOptions = [
           {
-            challengeId: 36,
+            challengeId: 41,
             options: [
-              { correct: true, text: "A) A tax credit directly reduces the amount of tax owed." },
-              { correct: false, text: "B) A tax credit reduces taxable income." },
-              { correct: false, text: "C) A tax credit is a percentage of the amount spent on certain expenses." },
-              { correct: false, text: "D) A tax credit increases the amount of taxable income." },
+              { correct: false, text: "a) To inform the audience about a new policy" },
+              { correct: true, text: "b) To persuade the audience to take action" },
+              { correct: false, text: "c) To entertain the audience with a story" },
+              { correct: false, text: "d) To explain a complicated process" },
             ],
           },
           {
-            challengeId: 37,
+            challengeId: 42,
             options: [
-              { correct: true, text: "A) A fixed amount that reduces taxable income, available to all taxpayers." },
-              { correct: false, text: "B) An itemized deduction for specific expenses." },
-              { correct: false, text: "C) A tax credit based on income level." },
-              { correct: false, text: "D) A deduction for business expenses." },
+              { correct: true, text: "a) The speaker is enthusiastic about the topic." },
+              { correct: false, text: "b) The speaker is indifferent to the audience." },
+              { correct: false, text: "c) The speaker is critical of the subject." },
+              { correct: false, text: "d) The speaker is unsure of their position." },
             ],
           },
           {
-            challengeId: 38,
+            challengeId: 43,
             options: [
-              { correct: true, text: "A) Taxable income includes wages, interest, and investment gains, whereas non-taxable income includes gifts and certain benefits." },
-              { correct: false, text: "B) Non-taxable income includes wages, interest, and investment gains, whereas taxable income includes gifts and certain benefits." },
-              { correct: false, text: "C) Taxable income is always higher than non-taxable income." },
-              { correct: false, text: "D) There is no significant difference between taxable and non-taxable income." },
+              { correct: false, text: "a) The task is extremely difficult." },
+              { correct: false, text: "b) The task requires specialized knowledge." },
+              { correct: true, text: "c) The task is simple and straightforward." },
+              { correct: false, text: "d) The task is impossible to complete." },
             ],
           },
           {
-            challengeId: 39,
+            challengeId: 44,
             options: [
-              { correct: true, text: "A) A tax designed to ensure that individuals with significant deductions still pay a minimum amount of tax." },
-              { correct: false, text: "B) A tax that applies only to high-income earners." },
-              { correct: false, text: "C) A tax that replaces the standard income tax for certain individuals." },
-              { correct: false, text: "D) A tax credit for alternative energy investments." },
+              { correct: true, text: "a) Authoritative" },
+              { correct: false, text: "b) Sarcastic" },
+              { correct: false, text: "c) Apologetic" },
+              { correct: false, text: "d) Indifferent" },
             ],
           },
           {
-            challengeId: 40,
+            challengeId: 45,
             options: [
-              { correct: true, text: "A) Selling investments at a loss to offset capital gains taxes." },
-              { correct: false, text: "B) Selling investments at a profit to increase taxable income." },
-              { correct: false, text: "C) Deferring taxes on investment gains until retirement." },
-              { correct: false, text: "D) Investing in tax-free municipal bonds to avoid capital gains taxes." },
+              { correct: false, text: "a) By ignoring the problem" },
+              { correct: true, text: "b) By addressing it immediately" },
+              { correct: false, text: "c) By waiting for further instructions" },
+              { correct: false, text: "d) By seeking external help" },
             ],
-          },
+          }
         ];
 
-        for (const challenge of understandingTaxationBasicsChallenges) {
-            await db.insert(schema.challenges).values(challenge);
+        // Challenges and options for "Part 2: Speaking Practice"
+        const speakingChallenges = [
+          {
+            lessonId: 10,
+            id: 46,
+            type: 'SELECT' as 'SELECT',
+            question: "Which of the following is the best way to open a formal presentation?",
+            order: 1,
+          },
+          {
+            lessonId: 10,
+            id: 47,
+            type: 'SELECT' as 'SELECT',
+            question: "Identify the most effective way to structure a persuasive speech:",
+            order: 2,
+          },
+          {
+            lessonId: 10,
+            id: 48,
+            type: 'SELECT' as 'SELECT',
+            question: "Choose the best way to respond to a challenging question during a Q&A session:",
+            order: 3,
+          },
+          {
+            lessonId: 10,
+            id: 49,
+            type: 'SELECT' as 'SELECT',
+            question: "Which strategy is most effective for maintaining audience engagement during a speech?",
+            order: 4,
+          },
+          {
+            lessonId: 10,
+            id: 50,
+            type: 'SELECT' as 'SELECT',
+            question: "What is the best way to conclude a persuasive speech?",
+            order: 5,
           }
-          for (const optionSet of understandingTaxationBasicsOptions) {
-            await db.insert(schema.challengeOptions).values(
-              optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
-            );
+        ];
+
+        const speakingOptions = [
+          {
+            challengeId: 46,
+            options: [
+              { correct: false, text: "a) 'Hey everyone, thanks for coming.'" },
+              { correct: true, text: "b) 'Hello, thank you all for being here today.'" },
+              { correct: false, text: "c) 'What’s up, let’s get started.'" },
+              { correct: false, text: "d) 'So, let’s begin, shall we?'" },
+            ],
+          },
+          {
+            challengeId: 47,
+            options: [
+              { correct: true, text: "a) Introduction, argument, conclusion" },
+              { correct: false, text: "b) Argument, conclusion, introduction" },
+              { correct: false, text: "c) Conclusion, introduction, argument" },
+              { correct: false, text: "d) Introduction, conclusion, argument" },
+            ],
+          },
+          {
+            challengeId: 48,
+            options: [
+              { correct: true, text: "a) 'That’s a good question, let me explain…'" },
+              { correct: false, text: "b) 'I don’t know, next question.'" },
+              { correct: false, text: "c) 'Why would you ask that?'" },
+              { correct: false, text: "d) 'I’ll get back to you on that.'" },
+            ],
+          },
+          {
+            challengeId: 49,
+            options: [
+              { correct: false, text: "a) Monotone delivery" },
+              { correct: true, text: "b) Interactive questions" },
+              { correct: false, text: "c) Rapid pacing" },
+              { correct: false, text: "d) Reading directly from notes" },
+            ],
+          },
+          {
+            challengeId: 50,
+            options: [
+              { correct: false, text: "a) Thank the audience and sit down." },
+              { correct: false, text: "b) Summarize key points and issue a call to action." },
+              { correct: false, text: "c) Introduce new arguments to strengthen your case." },
+              { correct: true, text: "d) End abruptly to leave the audience thinking." },
+            ],
           }
-  
-          for (const challenge of taxStrategiesAndBenefitsChallenges) {
-            await db.insert(schema.challenges).values(challenge);
-          }
-          for (const optionSet of taxStrategiesAndBenefitsOptions ) {
-            await db.insert(schema.challengeOptions).values(
-              optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
-            );
-          }
+        ];
+
+        // Insert challenges and options for each lesson
+        for (const challenge of listeningChallenges) {
+          await db.insert(schema.challenges).values(challenge);
+        }
+        for (const optionSet of listeningOptions) {
+          await db.insert(schema.challengeOptions).values(
+            optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
+          );
+        }
+
+        for (const challenge of speakingChallenges) {
+          await db.insert(schema.challenges).values(challenge);
+        }
+        for (const optionSet of speakingOptions) {
+          await db.insert(schema.challengeOptions).values(
+            optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
+          );
+        }
       }
     
 
-    console.log("Seeding complete");
+    console.log("Database seeded successfully");
   } catch (error) {
+
     console.error("Error seeding database:", error);
   }
 };

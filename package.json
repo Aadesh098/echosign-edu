@@ -1,5 +1,5 @@
 {
-  "name": "jasmine",
+  "name": "EchoSign",
   "version": "1.0.1",
   "private": true,
   "scripts": {
@@ -24,14 +24,14 @@
     "nextjs",
     "vercel",
     "react",
-    "jasmine",
+    "EchoSign",
     "learn-language",
     "shadcn",
     "shadcn-ui",
     "radix-ui",
     "cn",
     "clsx",
-    "Jasmine",
+    "EchoSign",
     "postgresql",
     "sonner",
     "drizzle",

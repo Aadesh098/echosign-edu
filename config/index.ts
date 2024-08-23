@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const siteConfig: Metadata = {
-  title: "Jasmine",
+  title: "EchoSign",
   description:
     "Interactive platform for language learning with lessons, quizzes, and progress tracking.",
   keywords: [
@@ -9,14 +9,14 @@ export const siteConfig: Metadata = {
     "nextjs",
     "vercel",
     "react",
-    "jasmine",
+    "EchoSign",
     "learn-language",
     "shadcn",
     "shadcn-ui",
     "radix-ui",
     "cn",
     "clsx",
-    "Jasmine",
+    "EchoSign",
     "postgresql",
     "sonner",
     "drizzle",
@@ -42,5 +42,5 @@ export const siteConfig: Metadata = {
 } as const;
 
 export const links = {
-  sourceCode: "https://github.com/Aadesh098/jasmine",
+  sourceCode: "https://github.com/Aadesh098/EchoSign",
 } as const;

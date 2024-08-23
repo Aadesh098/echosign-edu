@@ -5,45 +5,38 @@ import { drizzle } from "drizzle-orm/neon-http";
 import * as schema from "@/db/schema";
 
 const sql = neon(process.env.DATABASE_URL);
-
 const db = drizzle(sql, { schema });
 
 const main = async () => {
   try {
     console.log("Seeding database");
 
-    // Delete all existing data
-    await Promise.all([
-      db.delete(schema.userProgress),
-      db.delete(schema.challenges),
-      db.delete(schema.units),
-      db.delete(schema.lessons),
-      db.delete(schema.courses),
-      db.delete(schema.challengeOptions),
-    ]);
+    // // Delete all existing data
+    // await Promise.all([
+    //   db.delete(schema.userProgress),
+    //   db.delete(schema.challengeOptions),
+    //   db.delete(schema.challenges),
+    //   db.delete(schema.lessons),
+    //   db.delete(schema.units),
+    //   db.delete(schema.courses),
+    // ]);
 
-    // Insert courses
-    const courses = await db
-      .insert(schema.courses)
-      .values([{ title: "Spanish", imageSrc: "/es.svg" }])
-      .returning();
+    // // Insert courses
+    // const courses = await db
+    //   .insert(schema.courses)
+    //   .values([{ title: "Vocabulary Building", imageSrc: "/vocab.svg" }])
+    //   .returning();
 
     // For each course, insert units
-    for (const course of courses) {
+    // for (const course of courses) {
       const units = await db
         .insert(schema.units)
         .values([
           {
-            courseId: course.id,
-            title: "Unit 1",
-            description: `Learn the basics of ${course.title}`,
+            courseId: 14,
+            title: "Chapter 1: Vocabulary Building",
+            description: "Expand and refine your vocabulary to enhance your understanding and communication skills.",
             order: 1,
-          },
-          {
-            courseId: course.id,
-            title: "Unit 2",
-            description: `Learn intermediate ${course.title}`,
-            order: 2,
           },
         ])
         .returning();
@@ -53,282 +46,210 @@ const main = async () => {
         const lessons = await db
           .insert(schema.lessons)
           .values([
-            { unitId: unit.id, title: "Nouns", order: 1 },
-            { unitId: unit.id, title: "Verbs", order: 2 },
-            { unitId: unit.id, title: "Adjectives", order: 3 },
-            { unitId: unit.id, title: "Phrases", order: 4 },
-            { unitId: unit.id, title: "Sentences", order: 5 },
+            { unitId: unit.id, title: "Part 1: Advanced Word Usage", order: 1, id: 1 },
+            { unitId: unit.id, title: "Part 2: Idioms and Phrases", order: 2, id: 2 },
           ])
           .returning();
 
-        // For each lesson, insert challenges
-        for (const lesson of lessons) {
-          const challenges = await db
-            .insert(schema.challenges)
-            .values([
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the man"?',
-                order: 1,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the woman"?',
-                order: 2,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the boy"?',
-                order: 3,
-              },
-              {
-                lessonId: lesson.id,
-                type: "ASSIST",
-                question: '"the man"',
-                order: 4,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the zombie"?',
-                order: 5,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the robot"?',
-                order: 6,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the girl"?',
-                order: 7,
-              },
-              {
-                lessonId: lesson.id,
-                type: "ASSIST",
-                question: '"the zombie"',
-                order: 8,
-              },
-            ])
-            .returning();
+        // Challenges and options for "Part 1: Advanced Word Usage"
+        const advancedWordUsageChallenges = [
+          {
+            lessonId: 1,
+            id: 1,
+            type: 'SELECT' as 'SELECT', 
+            question: "Which word best completes the sentence? 'Her __________ demeanor made her a favorite among the team.'",
+            order: 1,
+          },
+          {
+            lessonId: 1,
+            id: 2,
+            type: 'SELECT' as 'SELECT', 
+            question: "Choose the synonym for the word 'ephemeral.'",
+            order: 2,
+          },
+          {
+            lessonId: 1,
+            id: 3,
+            type: 'SELECT' as 'SELECT', 
+            question: "Which word is the antonym of 'gregarious'?",
+            order: 3,
+          },
+          {
+            lessonId: 1,
+            id: 4,
+            type: 'SELECT' as 'SELECT', 
+            question: "Identify the word that best matches this definition: 'To criticize severely.'",
+            order: 4,
+          },
+          {
+            lessonId: 1,
+            id: 5,
+            type: 'SELECT' as 'SELECT', 
+            question: "Choose the most appropriate word to fill in the blank: 'The scientist’s theory was __________ and quickly gained widespread acceptance.'",
+            order: 5,
+          },
+        ];
 
-          // For each challenge, insert challenge options
-          for (const challenge of challenges) {
-            if (challenge.order === 1) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
+        const advancedWordUsageOptions = [
+          {
+            challengeId: 1,
+            options: [
+              { correct: false, text: "a) apathetic" },
+              { correct: true, text: "b) affable" },
+              { correct: false, text: "c) arrogant" },
+              { correct: false, text: "d) aloof" },
+            ],
+          },
+          {
+            challengeId: 2,
+            options: [
+              { correct: false, text: "a) everlasting" },
+              { correct: true, text: "b) transient" },
+              { correct: false, text: "c) tedious" },
+              { correct: false, text: "d) meticulous" },
+            ],
+          },
+          {
+            challengeId: 3,
+            options: [
+              { correct: false, text: "a) sociable" },
+              { correct: false, text: "b) loquacious" },
+              { correct: true, text: "c) reclusive" },
+              { correct: false, text: "d) jubilant" },
+            ],
+          },
+          {
+            challengeId: 4,
+            options: [
+              { correct: false, text: "a) admonish" },
+              { correct: false, text: "b) extol" },
+              { correct: false, text: "c) exalt" },
+              { correct: true, text: "d) berate" },
+            ],
+          },
+          {
+            challengeId: 5,
+            options: [
+              { correct: false, text: "a) esoteric" },
+              { correct: false, text: "b) controversial" },
+              { correct: true, text: "c) cogent" },
+              { correct: false, text: "d) redundant" },
+            ],
+          },
+        ];
 
-            if (challenge.order === 2) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
-                  audioSrc: "/es_boy.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-              ]);
-            }
+        // Challenges and options for "Part 2: Idioms and Phrases"
+        const idiomsAndPhrasesChallenges = [
+          {
+            lessonId: 2,
+            id: 6,
+            type: 'SELECT' as 'SELECT', 
+            question: "What does the idiom 'barking up the wrong tree' mean?",
+            order: 1,
+          },
+          {
+            lessonId: 2,
+            id: 7,
+            type: 'SELECT' as 'SELECT', 
+            question: "Choose the correct meaning of 'a blessing in disguise.'",
+            order: 2,
+          },
+          {
+            lessonId: 2,
+            id: 8,
+            type: 'SELECT' as 'SELECT', 
+            question: "'Burning the midnight oil' refers to:",
+            order: 3,
+          },
+          {
+            lessonId: 2,
+            id: 9,
+            type: 'SELECT' as 'SELECT', 
+            question: "What does the phrase 'hit the nail on the head' mean?",
+            order: 4,
+          },
+          {
+            lessonId: 2,
+            id: 10,
+            type: 'SELECT' as 'SELECT', 
+            question: "The phrase 'once in a blue moon' means:",
+            order: 5,
+          },
+        ];
 
-            if (challenge.order === 3) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
+        const idiomsAndPhrasesOptions = [
+          {
+            challengeId: 6,
+            options: [
+              { correct: false, text: "a) To complain loudly" },
+              { correct: true, text: "b) To pursue the wrong solution" },
+              { correct: false, text: "c) To avoid responsibility" },
+              { correct: false, text: "d) To engage in unnecessary conflict" },
+            ],
+          },
+          {
+            challengeId: 7,
+            options: [
+              { correct: true, text: "a) Something bad that turns out to be good" },
+              { correct: false, text: "b) An unexpected good fortune" },
+              { correct: false, text: "c) A hidden talent" },
+              { correct: false, text: "d) An unwelcome surprise" },
+            ],
+          },
+          {
+            challengeId: 8,
+            options: [
+              { correct: true, text: "a) Working late into the night" },
+              { correct: false, text: "b) Wasting energy" },
+              { correct: false, text: "c) Taking unnecessary risks" },
+              { correct: false, text: "d) Celebrating excessively" },
+            ],
+          },
+          {
+            challengeId: 9,
+            options: [
+              { correct: false, text: "a) To be extremely lucky" },
+              { correct: true, text: "b) To say exactly the right thing" },
+              { correct: false, text: "c) To fail completely" },
+              { correct: false, text: "d) To miss an opportunity" },
+            ],
+          },
+          {
+            challengeId: 10,
+            options: [
+              { correct: true, text: "a) Happening very rarely" },
+              { correct: false, text: "b) Occurring frequently" },
+              { correct: false, text: "c) Lasting a long time" },
+              { correct: false, text: "d) Being common and ordinary" },
+            ],
+          },
+        ];
 
-            if (challenge.order === 4) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el hombre",
-                  audioSrc: "/es_man.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
+        // Insert challenges and options for each lesson
+        for (const challenge of advancedWordUsageChallenges) {
+          await db.insert(schema.challenges).values(challenge);
+        }
+        for (const optionSet of advancedWordUsageOptions) {
+          await db.insert(schema.challengeOptions).values(
+            optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
+          );
+        }
 
-            if (challenge.order === 5) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
-                  audioSrc: "/es_zombie.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 6) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el robot",
-                  imageSrc: "/robot.svg",
-                  audioSrc: "/es_robot.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
-                  audioSrc: "/es_zombie.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 7) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "la nina",
-                  imageSrc: "/girl.svg",
-                  audioSrc: "/es_girl.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
-                  audioSrc: "/es_zombie.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 8) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el zombie",
-                  audioSrc: "/es_zombie.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
-          }
+        for (const challenge of idiomsAndPhrasesChallenges) {
+          await db.insert(schema.challenges).values(challenge);
+        }
+        for (const optionSet of idiomsAndPhrasesOptions) {
+          await db.insert(schema.challengeOptions).values(
+            optionSet.options.map(option => ({ ...option, challengeId: optionSet.challengeId }))
+          );
         }
       }
-    }
+    
+
     console.log("Database seeded successfully");
   } catch (error) {
-    console.error(error);
-    throw new Error("Failed to seed database");
+    console.error("Error seeding database:", error);
   }
 };
 
-void main();
+main();

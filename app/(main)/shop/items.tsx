@@ -68,11 +68,11 @@ export const Items = ({
         </Button>
       </div>
       <div className="flex w-full items-center gap-x-4 border-t-2 p-4">
-        <Image src="/Policybazaar_Logo.gif" alt="Heart" height={60} width={60} />
+        <Image src="/amazon.png" alt="Heart" height={60} width={60} />
 
         <div className="flex-1">
           <p className="text-base font-bold text-neutral-700 lg:text-xl">
-            Policy Bazaar
+            Amazon Coupons 
           </p>
         </div>
 
@@ -95,11 +95,11 @@ export const Items = ({
         </Button>
       </div>
       <div className="flex w-full items-center gap-x-4 border-t-2 p-4">
-        <Image src="/acko.svg" alt="Heart" height={60} width={60} />
+        <Image src="/flipkart.jpg" alt="Heart" height={60} width={60} />
 
         <div className="flex-1">
           <p className="text-base font-bold text-neutral-700 lg:text-xl">
-            ACKO
+            Flipkart Coupons 
           </p>
         </div>
 
@@ -122,11 +122,11 @@ export const Items = ({
         </Button>
       </div>
       <div className="flex w-full items-center gap-x-4 border-t-2 p-4">
-        <Image src="/bjfin.svg" alt="Heart" height={60} width={60} />
+        <Image src="/mmt.jpg" alt="Heart" height={60} width={60} />
 
         <div className="flex-1">
           <p className="text-base font-bold text-neutral-700 lg:text-xl">
-            Bajaj Finserv
+            MakeMyTrip Credits 
           </p>
         </div>
 
@@ -149,11 +149,11 @@ export const Items = ({
         </Button>
       </div>
       <div className="flex w-full items-center gap-x-4 border-t-2 p-4">
-        <Image src="/lic.svg" alt="Heart" height={60} width={60} />
+        <Image src="/netflix.png" alt="Heart" height={60} width={60} />
 
         <div className="flex-1">
           <p className="text-base font-bold text-neutral-700 lg:text-xl">
-            LIC Insurance
+            Netflix Subscription 
           </p>
         </div>
 
@@ -176,11 +176,11 @@ export const Items = ({
         </Button>
       </div>
       <div className="flex w-full items-center gap-x-4 border-t-2 p-4">
-        <Image src="/starh.svg" alt="Heart" height={60} width={60} />
+        <Image src="/hotstar.jpg" alt="Heart" height={60} width={60} />
 
         <div className="flex-1">
           <p className="text-base font-bold text-neutral-700 lg:text-xl">
-            STAR Health
+            Hotstar Subscription
           </p>
         </div>
 
