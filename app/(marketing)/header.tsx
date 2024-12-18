@@ -24,7 +24,7 @@ export const Header = () => {
           <Image src="/logo.jpg" alt="Mascot" height={40} width={40} />
 
           <h1 className="text-2xl font-extrabold tracking-wide text-violet-600">
-            EchoSign
+            EchoSign-Edu
           </h1>
         </Link>
 
