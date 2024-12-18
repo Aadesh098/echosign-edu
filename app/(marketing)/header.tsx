@@ -62,6 +62,12 @@ export const Header = () => {
                 width={20}
               />
             </Link>
+
+            <Link href="https://echosign-demo.vercel.app/" passHref>
+              <Button size="lg" variant="ghost">
+                Demo
+              </Button>
+            </Link>
           </ClerkLoaded>
         </div>
       </div>

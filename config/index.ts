@@ -43,4 +43,5 @@ export const siteConfig: Metadata = {
 
 export const links = {
   sourceCode: "https://github.com/Aadesh098/echosign-edu",
+  demo:"https://echosign-demo.vercel.app/" ,
 } as const;
