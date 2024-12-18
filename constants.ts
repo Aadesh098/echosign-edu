@@ -4,27 +4,27 @@ export const MAX_HEARTS = 5;
 
 export const QUESTS = [
   {
-    title: "Earn 20 XP",
+    title: "Level 1: Novice",
     value: 20,
   },
   {
-    title: "Earn 50 XP",
+    title: "Level 2: Beginner",
     value: 50,
   },
   {
-    title: "Earn 100 XP",
+    title: "Level 3: Apprentice",
     value: 100,
   },
   {
-    title: "Earn 250 XP",
+    title: "Level 4: Amateur",
     value: 250,
   },
   {
-    title: "Earn 500 XP",
+    title: "Level 5: Expert",
     value: 500,
   },
   {
-    title: "Earn 1000 XP",
+    title: "Level 6: Legend",
     value: 1000,
   },
 ];
